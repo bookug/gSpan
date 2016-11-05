@@ -1,57 +1,47 @@
 gSpan
+==============
 
-./dig file 0.07 
-0.1 for big graph, while 0.7 for small graph
-0.05 0.1 0.15 0.2 0.25 0.3
-0.4 0.5 0.6 0.7 0.8 0.9
+gSpan algorithm in data mining
 
-Target: frequent subgraphs, connected, labeled, undirected, single-machine, embedded instead of induced
-Require: all graphs can be stored in memory(if not, algorithm may have to change)
-Parameter: enum different support(for example, 6.5%), and lower the corresponding time(for example 10min)
-Accuracy: compare with gSpan library online or others programs, almost is ok
+**Features:**
 
-Some References:
-http://www.cs.ucsb.edu/~xyan/software/gSpan.htm
-http://www.tuicool.com/articles/FvaEJju
-source codes on github
+1. Support basic sub-structure mining.
 
-Thought:
-1. keeping matching of rightmost path in each data graph for a pattern
-2. strict dfs code order in searching space 
+2. Target: frequent subgraphs, connected, labeled, undirected, single-machine, embedded instead of induced
+3. Require: all graphs can be stored in memory(if not, algorithm may have to change, the memory cost usually < 1G)
 
-TODO:
-bugs exist(more results)
-induced version
-distributed version
+**Usage:**
+	
+use make to generate the executable, that is, dig:
+```	
+make
+```
+run on your graph.data with the support and you will get the result:
+```	
+./dig file 0.07 [ans.txt]
+```
+0.1 for big graph, while 0.5 for small graph
 
-Notes:
-special graphs to consider    
-v 0 2 
-v 1 2
-v 2 2
-v 3 2
-v 4 2
-v 5 2
-e 0 1 2
-e 0 2 2
-e 1 2 2
-e 0 3 2
-e 1 4 2
-e 2 5 2
-
-one problem is that a false pattern will be output:
-2-2-2-2
-  | |
-  2 2
-
-2-(2)-3-(3)-3-(2)-2
-The wrong graph si generated from v3-v0-v1-v2
-                                        |
-										v4
-original rightmost path is v3-v0-v1-v2, now is v3-v0-v1-v4, so we can grow from v0 to v2 again!!!
-This is impossible! when growing, it can point to vertex in the rightmost path, but not the internal node!!!
-
+**Notice:**
 
 Notice the difference between > and >= when considering minsup, and the float2integer is also a problem!
 this may cause result different, but this is not our fault!
+
+**TODO:**
+
+1. bugs exist(less results)
+2. induced version
+3. distributed version
+
+**LOGS:**
+11/01/2016
+1. finish the basic version of this project
+2. do some optimizations
+
+
+**Reference:**
+
+1. http://www.cs.ucsb.edu/~xyan/software/gSpan.htm
+2. http://www.tuicool.com/articles/FvaEJju
+3. source codes on github
 
